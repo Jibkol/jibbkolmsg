@@ -1,0 +1,423 @@
+/* Reset + Base */
+*,body,html{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header (top) */
+#hup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #202c33;
+  color: #fff;
+}
+
+#btns {
+  display: flex;
+  gap: 8px;
+}
+
+#btns .btn img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile menu */
+#mobile-menu {
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 10px;
+  background: #2a2f32;
+  border-radius: 6px;
+  z-index: 1000;
+  width: 220px;
+}
+
+#mobile-menu.show {
+  display: block;
+}
+
+#mobile-menu ul {
+  list-style: none;
+}
+
+#mobile-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#mobile-menu li:hover {
+  background: #3a3f42;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+#overlay.show {
+  display: block;
+}
+
+/* Main layout */
+#desk {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+#main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Search */
+#search {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #202c33;
+  gap: 8px;
+}
+
+#search input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  background: #2a2f32;
+  color: #fff;
+}
+
+/* Filter nav */
+#nav {
+  display: flex;
+  overflow-x: auto;
+  background: #111b21;
+}
+
+#nav button {
+  flex: none;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+}
+
+#nav button.active {
+  border-bottom: 2px solid #00a884;
+  color: #fff;
+}
+
+/* Left column: chats */
+#chats-list {
+  width: 320px;
+  background: #111b21;
+  border-right: 1px solid #2a2f32;
+  overflow-y: auto;
+}
+
+.chat {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #2a2f32;
+}
+
+.chat:hover {
+  background: #202c33;
+}
+
+.chat img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.chat-info {
+  flex: 1;
+}
+
+.chat-info h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.chat-info p {
+  font-size: 13px;
+  color: #bbb;
+}
+
+.chat-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.unread-count {
+  background: #00a884;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Right panes (chats, status, calls, community) */
+#panes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0b141a;
+  overflow: hidden;
+}
+
+.jibapp-message {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+
+.jibapp-message.active {
+  display: flex;
+}
+
+/* Chat header */
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #202c33;
+}
+
+#msg-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#msg-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+#msg-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.msg-btn img {
+  width: 22px;
+}
+
+/* Messages area */
+#msg-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.msg-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.encryption-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.msg {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.msg.received {
+  background: #202c33;
+  align-self: flex-start;
+}
+
+.msg.sent {
+  background: #005c4b;
+  align-self: flex-end;
+}
+
+.msg-time {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.msg-time img.double-tick {
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Input area */
+#msg-input-area {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #202c33;
+  gap: 8px;
+}
+
+#input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2a2f32;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+#input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+
+#input button img {
+  width: 22px;
+}
+
+.send-btn img {
+  width: 22px;
+}
+
+/* Status / Calls / Community sections */
+.status-list,
+.calls-list,
+.community-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+}
+
+.status-item,
+.call-item,
+.community-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #202c33;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.status-item img,
+.call-item img,
+.community-item img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+/* Bottom nav */
+#nav-bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #202c33;
+  padding: 6px 0;
+}
+
+.nav-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #bbb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 6px 0;
+}
+
+.nav-btn.active {
+  color: #00a884;
+}
+
+.nav-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Floating buttons */
+#floating-buttons {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fab {
+  background: #00a884;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 6px;
+}

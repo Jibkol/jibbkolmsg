@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="msg.css">
+</head>
+<body>
+    <header id="hup">
+        <h2>JibbApp</h2>
+        <div id="btns">
+            <button id="camera" class="btn"><img src="./assets/unsplash_32px.svg" alt=""></button>
+            <button id="menu" class="btn">
+                <img src="./assets/menu_vertical_24px.svg" alt="menu">
+            </button>
+        </div>
+    </header>
+    
+    <div id="mobile-menu">
+        <ul>
+            <li>New group</li>
+            <li>New broadcast</li>
+            <li>Linked devices</li>
+            <li>Starred</li>
+            <li>Read all</li>
+            <li>Settings</li>
+            <li>Switch accounts</li>
+            <li>
+                <button id="dark-mode">
+                    <img src="./assets/toggle_off_24px.svg" alt="dark mode" id="light-icon">
+                    <img src="./assets/toggle_on_24px.svg" alt="light mode" id="dark-icon">
+                    Dark Mode
+                </button>
+            </li>
+        </ul>
+    </div>
+    
+    <div id="overlay"></div>
+    
+    <section id="desk">
+        <header>
+            <nav>
+                <ul>
+                    <li><button><img src="" alt=""></button></li>
+                    <li><button></button></li>
+                    <li><button></button></li>
+                    <li><button></button></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="main">
+            <div id="search">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="35px" height="35px" fill="none">
+                    <path stroke="white" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+                </svg>
+                <input type="search" placeholder="Ask Meta Ai Or Search">
+            </div>
+            
+            <div id="nav">
+                <button class="active">All</button>
+                <button>Unread</button>
+                <button>Groups</button>
+                <button>Favourites</button>
+                <button>+</button>
+            </div>   
+            
+            <div id="chats-list">
+                <div id="chat-inner">
+                    <!-- Chat 1 -->
+                    <div class="chat" data-chat="chat7">
+                        <img src="./assets/BARCELONA MESSI.jpeg" alt="profile">
+                        <div class="chat-info">
+                            <h4>Jibbkol</h4>
+                            <p>Will do, thanks!</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>9:45 AM</span>
+                            <span class="unread-count">2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat 2 -->
+                    <div class="chat" data-chat="chat2">
+                        <img src="./assets/profile2.jpg" alt="profile" onerror="this.src='./assets/BARCELONA MESSI.jpeg'">
+                        <div class="chat-info">
+                            <h4>Sarah Wilson</h4>
+                            <p>Perfect! See you then 👋</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>Yesterday</span>
+                            <span class="unread-count">1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat 3 -->
+                    <div class="chat" data-chat="chat3">
+                        <img src="./assets/profile3.jpg" alt="profile" onerror="this.src='./assets/BARCELONA MESSI.jpeg'">
+                        <div class="chat-info">
+                            <h4>Mike Chen</h4>
+                            <p>Yes! Your advice was super helpful! 🙏</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>12:30 PM</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat 4 -->
+                    <div class="chat" data-chat="chat4">
+                        <img src="./assets/profile4.jpg" alt="profile" onerror="this.src='./assets/BARCELONA MESSI.jpeg'">
+                        <div class="chat-info">
+                            <h4>Emma Davis</h4>
+                            <p>8 PM! Bring your friends! 🎉</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>11:45 AM</span>
+                            <span class="unread-count">3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat 5 -->
+                    <div class="chat" data-chat="chat5">
+                        <img src="./assets/profile5.jpg" alt="profile" onerror="this.src='./assets/BARCELONA MESSI.jpeg'">
+                        <div class="chat-info">
+                            <h4>Alex Rodriguez</h4>
+                            <p>How about tomorrow at 2 PM?</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>10:20 AM</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat 6 -->
+                    <div class="chat" data-chat="chat6">
+                        <img src="./assets/BARCELONA MESSI.jpeg" alt="profile">
+                        <div class="chat-info">
+                            <h4>Lisa Thompson</h4>
+                            <p>Thanks for your help! 🙏</p>
+                        </div>
+                        <div class="chat-time">
+                            <span>12:15 PM</span>
+                            <span class="unread-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pc">
+            <header></header>
+        </section>
+    </section>
+    <div class="jibapp-message" id="chat7">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/BARCELONA MESSI.jpeg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Jibbkol</h4>
+                    <span>online</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Jibbkol can read them.</span>
+                </div>
+                <div class="msg received">
+                    <p>Hello, how are you?</p>
+                    <span class="msg-time">2:30 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>I'm good, thanks! How about you?</p>
+                    <span class="msg-time">2:31 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>Doing well, just working on a project.</p>
+                    <span class="msg-time">2:32 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>That's great to hear! Let me know if you need any help.</p>
+                    <span class="msg-time">2:33 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>Will do, thanks!</p>
+                    <span class="msg-time">2:34 PM</span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat 2 Message View -->
+    <div class="jibapp-message" id="chat2">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/profile2.jpg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Sarah Wilson</h4>
+                    <span>last seen 5 hours ago</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Sarah can read them.</span>
+                </div>
+                <div class="msg received">
+                    <p>Hi! Are we still meeting today?</p>
+                    <span class="msg-time">3:15 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Yes, 4 PM at the usual place?</p>
+                    <span class="msg-time">3:16 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>Perfect! See you then 👋</p>
+                    <span class="msg-time">3:17 PM</span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat 3 Message View -->
+    <div class="jibapp-message" id="chat3">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/profile3.jpg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Mike Chen</h4>
+                    <span>online</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Mike can read them.</span>
+                </div>
+                <div class="msg sent">
+                    <p>Hey Mike, did you figure out the issue?</p>
+                    <span class="msg-time">12:25 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>Yes! Your advice was super helpful! 🙏</p>
+                    <span class="msg-time">12:26 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Glad I could help! 😊</p>
+                    <span class="msg-time">12:27 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat 4 Message View -->
+    <div class="jibapp-message" id="chat4">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/profile4.jpg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Emma Davis</h4>
+                    <span>last seen yesterday</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Emma can read them.</span>
+                </div>
+                <div class="msg received">
+                    <p>Hey! Don't forget the party tonight!</p>
+                    <span class="msg-time">11:40 AM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Wouldn't miss it! What time?</p>
+                    <span class="msg-time">11:41 AM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>8 PM! Bring your friends! 🎉</p>
+                    <span class="msg-time">11:42 AM</span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat 5 Message View -->
+    <div class="jibapp-message" id="chat5">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/profile5.jpg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Alex Rodriguez</h4>
+                    <span>online</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Alex can read them.</span>
+                </div>
+                <div class="msg received">
+                    <p>Hi, we need to discuss the project timeline.</p>
+                    <span class="msg-time">10:15 AM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Sure, when are you available?</p>
+                    <span class="msg-time">10:16 AM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>How about tomorrow at 2 PM?</p>
+                    <span class="msg-time">10:17 AM</span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat 6 Message View -->
+    <div class="jibapp-message" id="chat6">
+        <header class="msg-header">
+            <div id="msg-profile">
+                <button class="msg-back-btn"><img src="./assets/back_50px.svg"></button>
+                <img src="./assets/BARCELONA MESSI.jpeg" alt="profile" id="msg-pfp">
+                <div id="name">
+                    <h4>Lisa Thompson</h4>
+                    <span>last seen 30 minutes ago</span>
+                </div>
+            </div>
+            <div id="msg-btns">
+                <button class="msg-btn"><img src="./assets/phone_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/video_call_50px.svg"></button>
+                <button class="msg-btn"><img src="./assets/menu_vertical_24px.svg"></button>
+            </div>
+        </header>
+        <div id="msg-body">
+            <div class="msg-content">
+                <div class="encryption-message">
+                    <img src="./assets/padlock_50px.svg" alt="padlock">
+                    <span> Messages and calls are end-to-end encrypted. Only you and Lisa can read them.</span>
+                </div>
+                <div class="msg sent">
+                    <p>Hey Lisa, did you figure out the issue?</p>
+                    <span class="msg-time">12:10 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>Yes! Your advice was super helpful! 🙏</p>
+                    <span class="msg-time">12:11 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Glad I could help! 😊</p>
+                    <span class="msg-time">12:12 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+                <div class="msg received">
+                    <p>You're the best! Let me know if you need anything.</p>
+                    <span class="msg-time">12:13 PM</span>
+                </div>
+                <div class="msg sent">
+                    <p>Will do! Have a great day!</p>
+                    <span class="msg-time">12:14 PM
+                        <img src="./assets/double_tick_32px.svg" alt="">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="msg-input-area">
+            <div id="input">
+                <button id="emoji-btn">
+                    <img src="./assets/happy_80px.svg" alt="emoji">
+                </button>
+                <input type="text" id="msg-input" placeholder="Type a message">
+                <button id="attach-btn">
+                    <img src="./assets/attach_24px.svg" alt="attach">
+                </button>
+                <button id="cam">
+                    <img src="./assets/unsplash_32px.svg" alt="camera">
+                </button>
+            </div>
+            <button class="send-btn">
+                <img src="./assets/microphone_24px.svg" alt="send" class="mic">
+                <img src="./assets/paper_plane_30px.svg" alt="" class="send">
+            </button>
+        </div>
+    </div>
+
+    <header id="nav-bottom">
+        <button class="nav-btn active">
+            <img src="./assets/chat_room_24px.svg" alt="chats">
+            <span>Chat</span>
+        </button>
+        <button class="nav-btn">
+            <img src="./assets/update_24px.svg" alt="contacts">
+            <span>Status</span>
+        </button>
+        <button class="nav-btn">
+            <img src="./assets/user_groups_80px.svg" alt="calls">
+            <span>Community</span>
+        </button>
+        <button class="nav-btn">
+            <img src="./assets/phone_50px.svg" alt="settings">
+            <span>Calls</span>
+        </button>
+    </header>
+    
+    <!-- Floating buttons -->
+    <div id="floating-buttons">
+        <button id="aiButton" class="fab">🤖</button>
+        <button id="newChatButton" class="fab">＋</button>
+    </div>
+
+    <script src="msg2.js"></script>
+</body>

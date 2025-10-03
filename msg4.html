@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JibbApp - Telegram Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0f1419;
+            color: #e6e6e6;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 30%;
+            background: #1f2c34;
+            border-right: 1px solid #2a3942;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 10px 16px;
+            background: #1f2c34;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a3942;
+            height: 60px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #00a884;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .icons img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            filter: invert(0.8);
+        }
+
+        /* Search */
+        .search-container {
+            padding: 8px 16px;
+            background: #1f2c34;
+        }
+
+        .search-box {
+            background: #2a3942;
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box img {
+            width: 16px;
+            height: 16px;
+            filter: invert(0.6);
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #e6e6e6;
+            width: 100%;
+        }
+
+        /* Chat List */
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .chat {
+            display: flex;
+            padding: 12px 16px;
+            gap: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #2a3942;
+            transition: background 0.2s;
+        }
+
+        .chat:hover {
+            background: #2a3942;
+        }
+
+        .chat.active {
+            background: #2a3942;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00a884;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .chat-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .chat-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .chat-info p {
+            font-size: 14px;
+            color: #8696a0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-time {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .chat-time span:first-child {
+            font-size: 12px;
+            color: #8696a0;
+        }
+
+        .unread-count {
+            background: #00a884;
+            color: #fff;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 12px;
+            min-width: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Chat Window */
+        .chat-window {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .jibapp-message {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            background: #0b141a;
+            position: relative;
+        }
+
+        .jibapp-message.active {
+            display: flex;
+        }
+
+        .msg-header {
+            padding: 10px 16px;
+            background: #1f2c34;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #2a3942;
+            height: 60px;
+        }
+
+        .msg-back-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .msg-back-btn:hover {
+            background: #2a3942;
+        }
+
+        .msg-name {
+            flex: 1;
+        }
+
+        .msg-name h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .msg-name span {
+            font-size: 13px;
+            color: #8696a0;
+            cursor: pointer;
+        }
+
+        .msg-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .msg-actions img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            filter: invert(0.8);
+        }
+
+        /* Message Content */
+        .msg-content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2317222b' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .msg {
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 70%;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .msg.received {
+            background: #2a3942;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+        }
+
+        .msg.sent {
+            background: #005c4b;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+
+        .msg p {
+            margin-bottom: 4px;
+        }
+
+        .msg-time {
+            font-size: 11px;
+            color: #8696a0;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .msg-tick {
+            font-size: 12px;
+            color: #8696a0;
+        }
+
+        .typing {
+            background: #2a3942;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            font-style: italic;
+            color: #8696a0;
+        }
+
+        .encryption-message {
+            text-align: center;
+            font-size: 12px;
+            color: #8696a0;
+            margin: 10px 0;
+            padding: 8px;
+            border-top: 1px solid #2a3942;
+            border-bottom: 1px solid #2a3942;
+        }
+
+        /* Message Input */
+        .msg-input-container {
+            padding: 8px 16px;
+            background: #1f2c34;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .msg-input-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .msg-input-actions img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            filter: invert(0.8);
+        }
+
+        .msg-input-wrapper {
+            flex: 1;
+            background: #2a3942;
+            border-radius: 20px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .msg-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #e6e6e6;
+            width: 100%;
+            resize: none;
+            max-height: 100px;
+            font-size: 15px;
+        }
+
+        .send-btn {
+            background: #00a884;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #06cf9c;
+        }
+
+        .send-btn.recording {
+            background: #f15c6d;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .mic {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1f2c34;
+            z-index: 100;
+            transition: right 0.3s ease;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a3942;
+        }
+
+        .mobile-menu-header h3 {
+            font-weight: 500;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #2a3942;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+            border-radius: 8px;
+            padding-left: 12px;
+        }
+
+        .menu-item:hover {
+            background: #2a3942;
+        }
+
+        .menu-item img {
+            width: 20px;
+            height: 20px;
+            filter: invert(0.8);
+        }
+
+        /* Status, Calls, Community sections */
+        .section {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            background: #0b141a;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        .section-header {
+            padding: 10px 16px;
+            background: #1f2c34;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #2a3942;
+            height: 60px;
+        }
+
+        .section-content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .status-item, .call-item, .community-item {
+            display: flex;
+            padding: 12px 16px;
+            gap: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #2a3942;
+            transition: background 0.2s;
+        }
+
+        .status-item:hover, .call-item:hover, .community-item:hover {
+            background: #2a3942;
+        }
+
+        .status-avatar, .call-avatar, .community-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00a884;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .status-avatar::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00a884;
+            border: 2px solid #1f2c34;
+        }
+
+        .call-avatar {
+            background: #8774e1;
+        }
+
+        .community-avatar {
+            background: #00a884;
+        }
+
+        .status-info, .call-info, .community-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .status-info h4, .call-info h4, .community-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .status-info p, .call-info p, .community-info p {
+            font-size: 14px;
+            color: #8696a0;
+        }
+
+        .call-time {
+            font-size: 12px;
+            color: #8696a0;
+        }
+
+        .call-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .call-icon img {
+            width: 20px;
+            height: 20px;
+            filter: invert(0.8);
+        }
+
+        .favorite-btn {
+            background: none;
+            border: none;
+            color: #8696a0;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+
+        .favorite-btn.active {
+            color: #ffcc00;
+        }
+
+        /* Context Menus */
+        .msg-context-menu, .chat-context-menu {
+            position: absolute;
+            background: #2a3942;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 8px 0;
+            min-width: 150px;
+        }
+
+        .msg-context-menu button, .chat-context-menu button {
+            background: none;
+            border: none;
+            color: #e6e6e6;
+            padding: 8px 16px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .msg-context-menu button:hover, .chat-context-menu button:hover {
+            background: #3d4b52;
+        }
+
+        /* Reactions */
+        .msg-reactions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .msg-reactions span {
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .reactions-picker {
+            position: absolute;
+            background: #2a3942;
+            border-radius: 20px;
+            padding: 6px;
+            display: flex;
+            gap: 6px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .reactions-picker button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .reactions-picker button:hover {
+            background: #3d4b52;
+        }
+
+        /* Search highlight */
+        .search-mark {
+            background: rgba(255, 204, 0, 0.3);
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+            
+            .chat-window {
+                display: none;
+            }
+            
+            .chat-window.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="avatar" onclick="alert('Profile clicked!')">JD</div>
+            <div class="icons">
+                <img src="./assets/community_24px.svg" alt="Communities" onclick="showSection('community')">
+                <img src="./assets/status_24px.svg" alt="Status" onclick="showSection('status')">
+                <img src="./assets/channel_24px.svg" alt="Channels" onclick="alert('Channels feature coming soon!')">
+                <img src="./assets/chats_24px.svg" alt="Chats" onclick="showSection('chats')">
+                <img src="./assets/settings_24px.svg" alt="Settings" onclick="alert('Settings feature coming soon!')">
+                <img src="./assets/menu_24px.svg" alt="Menu" onclick="toggleMobileMenu()">
+            </div>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <img src="./assets/search_24px.svg" alt="Search">
+                <input type="text" placeholder="Search or start new chat">
+            </div>
+        </div>
+
+        <div class="chat-list" id="chat-inner">
+            <div class="chat" data-chat="chat1">
+                <div class="chat-avatar">A</div>
+                <div class="chat-info">
+                    <h4>Alice Johnson</h4>
+                    <p>Hey, how are you doing?</p>
+                </div>
+                <div class="chat-time">
+                    <span>10:23</span>
+                    <div class="unread-count">2</div>
+                </div>
+            </div>
+            <div class="chat" data-chat="chat2">
+                <div class="chat-avatar">B</div>
+                <div class="chat-info">
+                    <h4>Bob Smith</h4>
+                    <p>Let's meet tomorrow</p>
+                </div>
+                <div class="chat-time">
+                    <span>09:15</span>
+                    <div class="unread-count">1</div>
+                </div>
+            </div>
+            <div class="chat" data-chat="chat3">
+                <div class="chat-avatar">C</div>
+                <div class="chat-info">
+                    <h4>Charlie Brown</h4>
+                    <p>Did you see the new update?</p>
+                </div>
+                <div class="chat-time">
+                    <span>Yesterday</span>
+                </div>
+            </div>
+            <div class="chat" data-chat="chat4">
+                <div class="chat-avatar">D</div>
+                <div class="chat-info">
+                    <h4>Diana Miller</h4>
+                    <p>Thanks for your help!</p>
+                </div>
+                <div class="chat-time">
+                    <span>Yesterday</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Windows -->
+    <div class="chat-window">
+        <!-- Chat 1 -->
+        <div class="jibapp-message" id="chat1">
+            <div class="msg-header">
+                <button class="msg-back-btn">←</button>
+                <div class="chat-avatar">A</div>
+                <div class="msg-name">
+                    <h4>Alice Johnson</h4>
+                    <span>online</span>
+                </div>
+                <div class="msg-actions">
+                    <img src="./assets/video_call_24px.svg" alt="Video call" onclick="alert('Video call feature coming soon!')">
+                    <img src="./assets/call_24px.svg" alt="Voice call" onclick="alert('Voice call feature coming soon!')">
+                    <img src="./assets/search_24px.svg" alt="Search" onclick="promptSearchInside('chat1')">
+                    <img src="./assets/menu_24px.svg" alt="Menu" onclick="toggleMobileMenu()">
+                </div>
+            </div>
+            <div class="msg-content">
+                <div class="encryption-message">
+                    Messages are end-to-end encrypted. No one outside of this chat, not even JibbApp, can read or listen to them.
+                </div>
+                <div class="msg received">
+                    <p>Hey there! How are you doing?</p>
+                    <span class="msg-time">10:20</span>
+                </div>
+                <div class="msg sent">
+                    <p>I'm good, thanks! How about you?</p>
+                    <span class="msg-time">10:21 <span class="msg-tick">✓✓</span></span>
+                </div>
+                <div class="msg received">
+                    <p>Doing great! Just finished the project we were working on.</p>
+                    <span class="msg-time">10:23</span>
+                </div>
+            </div>
+            <div class="msg-input-container">
+                <div class="msg-input-actions">
+                    <img src="./assets/emoji_24px.svg" alt="Emoji" onclick="alert('Emoji picker coming soon!')">
+                    <img src="./assets/attach_24px.svg" alt="Attach" onclick="alert('Attachment feature coming soon!')">
+                    <img src="./assets/camera_24px.svg" alt="Camera" onclick="openCamera()">
+                </div>
+                <div class="msg-input-wrapper">
+                    <textarea class="msg-input" placeholder="Type a message"></textarea>
+                </div>
+                <button class="send-btn">
+                    <img src="./assets/microphone_24px.svg" class="mic" />
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat 2 -->
+        <div class="jibapp-message" id="chat2">
+            <div class="msg-header">
+                <button class="msg-back-btn">←</button>
+                <div class="chat-avatar">B</div>
+                <div class="msg-name">
+                    <h4>Bob Smith</h4>
+                    <span>last seen 2 hours ago</span>
+                </div>
+                <div class="msg-actions">
+                    <img src="./assets/video_call_24px.svg" alt="Video call" onclick="alert('Video call feature coming soon!')">
+                    <img src="./assets/call_24px.svg" alt="Voice call" onclick="alert('Voice call feature coming soon!')">
+                    <img src="./assets/search_24px.svg" alt="Search" onclick="promptSearchInside('chat2')">
+                    <img src="./assets/menu_24px.svg" alt="Menu" onclick="toggleMobileMenu()">
+                </div>
+            </div>
+            <div class="msg-content">
+                <div class="encryption-message">
+                    Messages are end-to-end encrypted. No one outside of this chat, not even JibbApp, can read or listen to them.
+                </div>
+                <div class="msg received">
+                    <p>Let's meet tomorrow at the usual place</p>
+                    <span class="msg-time">09:10</span>
+                </div>
+                <div class="msg sent">
+                    <p>Sure, what time works for you?</p>
+                    <span class="msg-time">09:12 <span class="msg-tick">✓✓</span></span>
+                </div>
+                <div class="msg received">
+                    <p>How about 3 PM?</p>
+                    <span class="msg-time">09:15</span>
+                </div>
+            </div>
+            <div class="msg-input-container">
+                <div class="msg-input-actions">
+                    <img src="./assets/emoji_24px.svg" alt="Emoji" onclick="alert('Emoji picker coming soon!')">
+                    <img src="./assets/attach_24px.svg" alt="Attach" onclick="alert('Attachment feature coming soon!')">
+                    <img src="./assets/camera_24px.svg" alt="Camera" onclick="openCamera()">
+                </div>
+                <div class="msg-input-wrapper">
+                    <textarea class="msg-input" placeholder="Type a message"></textarea>
+                </div>
+                <button class="send-btn">
+                    <img src="./assets/microphone_24px.svg" class="mic" />
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat 3 -->
+        <div class="jibapp-message" id="chat3">
+            <div class="msg-header">
+                <button class="msg-back-btn">←</button>
+                <div class="chat-avatar">C</div>
+                <div class="msg-name">
+                    <h4>Charlie Brown</h4>
+                    <span>last seen 5 hours ago</span>
+                </div>
+                <div class="msg-actions">
+                    <img src="./assets/video_call_24px.svg" alt="Video call" onclick="alert('Video call feature coming soon!')">
+                    <img src="./assets/call_24px.svg" alt="Voice call" onclick="alert('Voice call feature coming soon!')">
+                    <img src="./assets/search_24px.svg" alt="Search" onclick="promptSearchInside('chat3')">
+                    <img src="./assets/menu_24px.svg" alt="Menu" onclick="toggleMobileMenu()">
+                </div>
+            </div>
+            <div class="msg-content">
+                <div class="encryption-message">
+                    Messages are end-to-end encrypted. No one outside of this chat, not even JibbApp, can read or listen to them.
+                </div>
+                <div class="msg received">
+                    <p>Did you see the new update? It's amazing!</p>
+                    <span class="msg-time">Yesterday</span>
+                </div>
+            </div>
+            <div class="msg-input-container">
+                <div class="msg-input-actions">
+                    <img src="./assets/emoji_24px.svg" alt="Emoji" onclick="alert('Emoji picker coming soon!')">
+                    <img src="./assets/attach_24px.svg" alt="Attach" onclick="alert('Attachment feature coming soon!')">
+                    <img src="./assets/camera_24px.svg" alt="Camera" onclick="openCamera()">
+                </div>
+                <div class="msg-input-wrapper">
+                    <textarea class="msg-input" placeholder="Type a message"></textarea>
+                </div>
+                <button class="send-btn">
+                    <img src="./assets/microphone_24px.svg" class="mic" />
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat 4 -->
+        <div class="jibapp-message" id="chat4">
+            <div class="msg-header">
+                <button class="msg-back-btn">←</button>
+                <div class="chat-avatar">D</div>
+                <div class="msg-name">
+                    <h4>Diana Miller</h4>
+                    <span>last seen 1 day ago</span>
+                </div>
+                <div class="msg-actions">
+                    <img src="./assets/video_call_24px.svg" alt="Video call" onclick="alert('Video call feature coming soon!')">
+                    <img src="./assets/call_24px.svg" alt="Voice call" onclick="alert('Voice call feature coming soon!')">
+                    <img src="./assets/search_24px.svg" alt="Search" onclick="promptSearchInside('chat4')">
+                    <img src="./assets/menu_24px.svg" alt="Menu" onclick="toggleMobileMenu()">
+                </div>
+            </div>
+            <div class="msg-content">
+                <div class="encryption-message">
+                    Messages are end-to-end encrypted. No one outside of this chat, not even JibbApp, can read or listen to them.
+                </div>
+                <div class="msg received">
+                    <p>Thanks for your help with the project!</p>
+                    <span class="msg-time">Yesterday</span>
+                </div>
+                <div class="msg sent">
+                    <p>You're welcome! Anytime 😊</p>
+                    <span class="msg-time">Yesterday <span class="msg-tick">✓✓</span></span>
+                </div>
+            </div>
+            <div class="msg-input-container">
+                <div class="msg-input-actions">
+                    <img src="./assets/emoji_24px.svg" alt="Emoji" onclick="alert('Emoji picker coming soon!')">
+                    <img src="./assets/attach_24px.svg" alt="Attach" onclick="alert('Attachment feature coming soon!')">
+                    <img src="./assets/camera_24px.svg" alt="Camera" onclick="openCamera()">
+                </div>
+                <div class="msg-input-wrapper">
+                    <textarea class="msg-input" placeholder="Type a message"></textarea>
+                </div>
+                <button class="send-btn">
+                    <img src="./assets/microphone_24px.svg" class="mic" />
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Section -->
+        <div class="section" id="status-section">
+            <div class="section-header">
+                <button class="msg-back-btn">←</button>
+                <div class="msg-name">
+                    <h4>Status</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="status-item">
+                    <div class="status-avatar">JD</div>
+                    <div class="status-info">
+                        <h4>My Status</h4>
+                        <p>Tap to add status update</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-avatar">A</div>
+                    <div class="status-info">
+                        <h4>Alice Johnson</h4>
+                        <p>Just now</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-avatar">B</div>
+                    <div class="status-info">
+                        <h4>Bob Smith</h4>
+                        <p>25 minutes ago</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-avatar">C</div>
+                    <div class="status-info">
+                        <h4>Charlie Brown</h4>
+                        <p>1 hour ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calls Section -->
+        <div class="section" id="calls-section">
+            <div class="section-header">
+                <button class="msg-back-btn">←</button>
+                <div class="msg-name">
+                    <h4>Calls</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="call-item">
+                    <div class="call-avatar">A</div>
+                    <div class="call-info">
+                        <h4>Alice Johnson</h4>
+                        <p>Outgoing • 5 minutes ago</p>
+                    </div>
+                    <div class="call-icon">
+                        <img src="./assets/call_24px.svg" alt="Call">
+                    </div>
+                </div>
+                <div class="call-item">
+                    <div class="call-avatar">B</div>
+                    <div class="call-info">
+                        <h4>Bob Smith</h4>
+                        <p>Incoming • 1 hour ago</p>
+                    </div>
+                    <div class="call-icon">
+                        <img src="./assets/video_call_24px.svg" alt="Video call">
+                    </div>
+                </div>
+                <div class="call-item">
+                    <div class="call-avatar">C</div>
+                    <div class="call-info">
+                        <h4>Charlie Brown</h4>
+                        <p>Missed • Yesterday</p>
+                    </div>
+                    <div class="call-icon">
+                        <img src="./assets/call_24px.svg" alt="Call">
+                    </div>
+                </div>
+                <div class="call-item">
+                    <div class="call-avatar">D</div>
+                    <div class="call-info">
+                        <h4>Diana Miller</h4>
+                        <p>Outgoing • 2 days ago</p>
+                    </div>
+                    <div class="call-icon">
+                        <img src="./assets/video_call_24px.svg" alt="Video call">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Section -->
+        <div class="section" id="community-section">
+            <div class="section-header">
+                <button class="msg-back-btn">←</button>
+                <div class="msg-name">
+                    <h4>Communities</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="community-item">
+                    <div class="community-avatar">W</div>
+                    <div class="community-info">
+                        <h4>Work Group</h4>
+                        <p>You: See you tomorrow at the meeting</p>
+                    </div>
+                    <div class="call-time">10:23</div>
+                </div>
+                <div class="community-item">
+                    <div class="community-avatar">F</div>
+                    <div class="community-info">
+                        <h4>Family</h4>
+                        <p>Mom: Don't forget to call grandma</p>
+                    </div>
+                    <div class="call-time">Yesterday</div>
+                </div>
+                <div class="community-item">
+                    <div class="community-avatar">G</div>
+                    <div class="community-info">
+                        <h4>Gaming Club</h4>
+                        <p>John: Who's online tonight?</p>
+                    </div>
+                    <div class="call-time">2 days ago</div>
+                </div>
+                <div class="community-item">
+                    <div class="community-avatar">S</div>
+                    <div class="community-info">
+                        <h4>Study Group</h4>
+                        <p>Sarah: I'll share the notes</p>
+                    </div>
+                    <div class="call-time">1 week ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-menu" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <div class="menu-item" onclick="alert('New group feature coming soon!')">
+            <img src="./assets/group_24px.svg" alt="New group">
+            <span>New group</span>
+        </div>
+        <div class="menu-item" onclick="alert('New broadcast feature coming soon!')">
+            <img src="./assets/broadcast_24px.svg" alt="New broadcast">
+            <span>New broadcast</span>
+        </div>
+        <div class="menu-item" onclick="alert('Linked devices feature coming soon!')">
+            <img src="./assets/linked_devices_24px.svg" alt="Linked devices">
+            <span>Linked devices</span>
+        </div>
+        <div class="menu-item" onclick="alert('Starred messages feature coming soon!')">
+            <img src="./assets/starred_24px.svg" alt="Starred messages">
+            <span>Starred messages</span>
+        </div>
+        <div class="menu-item" onclick="alert('Settings feature coming soon!')">
+            <img src="./assets/settings_24px.svg" alt="Settings">
+            <span>Settings</span>
+        </div>
+    </div>
+
+    <script>
+        // Your existing msg.js code would go here
+        // For brevity, I'm including a simplified version that focuses on the requested features
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize the chat functionality
+            initializeChatApp();
+        });
+
+        function initializeChatApp() {
+            // Chat open/close functionality
+            const chats = document.querySelectorAll(".chat");
+            const chatWindows = document.querySelectorAll(".jibapp-message");
+            const backButtons = document.querySelectorAll(".msg-back-btn");
+            const sendButtons = document.querySelectorAll(".send-btn");
+            const inputs = document.querySelectorAll(".msg-input");
+
+            // Open chat when clicking on a chat in the sidebar
+            chats.forEach(chat => {
+                chat.addEventListener("click", () => {
+                    const chatId = chat.getAttribute("data-chat");
+                    openChat(chatId);
+                });
+            });
+
+            // Back button functionality
+            backButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const chatWindow = btn.closest(".jibapp-message");
+                    if (chatWindow) {
+                        chatWindow.classList.remove("active");
+                    }
+                    // Show the sidebar on mobile
+                    if (window.innerWidth <= 768) {
+                        document.querySelector(".sidebar").style.display = "flex";
+                    }
+                });
+            });
+
+            // Send message functionality
+            sendButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const chatWindow = btn.closest(".jibapp-message");
+                    sendMessage(chatWindow);
+                });
+            });
+
+            // Enter key to send message
+            inputs.forEach(input => {
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        const chatWindow = input.closest(".jibapp-message");
+                        sendMessage(chatWindow);
+                    }
+                });
+            });
+
+            // Long press for voice message
+            let voiceTimer;
+            sendButtons.forEach(btn => {
+                btn.addEventListener("mousedown", startVoiceRecording);
+                btn.addEventListener("touchstart", startVoiceRecording);
+                
+                btn.addEventListener("mouseup", stopVoiceRecording);
+                btn.addEventListener("touchend", stopVoiceRecording);
+                btn.addEventListener("mouseleave", stopVoiceRecording);
+            });
+
+            function startVoiceRecording(e) {
+                e.preventDefault();
+                voiceTimer = setTimeout(() => {
+                    const btn = e.target.closest(".send-btn");
+                    btn.classList.add("recording");
+                    alert("Voice recording started... Release to send");
+                }, 500);
+            }
+
+            function stopVoiceRecording(e) {
+                clearTimeout(voiceTimer);
+                const btn = e.target.closest(".send-btn");
+                if (btn && btn.classList.contains("recording")) {
+                    btn.classList.remove("recording");
+                    const chatWindow = btn.closest(".jibapp-message");
+                    sendVoiceMessage(chatWindow);
+                }
+            }
+
+            // Initialize favorite buttons
+            initializeFavoriteButtons();
+        }
+
+        function openChat(chatId) {
+            // Hide all chat windows
+            document.querySelectorAll(".jibapp-message").forEach(win => {
+                win.classList.remove("active");
+            });
+            
+            // Hide all sections
+            document.querySelectorAll(".section").forEach(section => {
+                section.classList.remove("active");
+            });
+            
+            // Show the selected chat
+            const chatWindow = document.getElementById(chatId);
+            if (chatWindow) {
+                chatWindow.classList.add("active");
+                
+                // Hide sidebar on mobile when opening a chat
+                if (window.innerWidth <= 768) {
+                    document.querySelector(".sidebar").style.display = "none";
+                }
+                
+                // Mark as read
+                const chatElement = document.querySelector(`.chat[data-chat="${chatId}"]`);
+                if (chatElement) {
+                    const unreadCount = chatElement.querySelector(".unread-count");
+                    if (unreadCount) {
+                        unreadCount.style.display = "none";
+                    }
+                }
+                
+                // Focus on input
+                const input = chatWindow.querySelector(".msg-input");
+                if (input) {
+                    input.focus();
+                }
+            }
+        }
+
+        function sendMessage(chatWindow) {
+            if (!chatWindow) return;
+            
+            const input = chatWindow.querySelector(".msg-input");
+            const message = input.value.trim();
+            
+            if (message) {
+                const messageElement = createMessageElement(message, "sent");
+                const content = chatWindow.querySelector(".msg-content");
+                content.appendChild(messageElement);
+                
+                // Clear input
+                input.value = "";
+                
+                // Scroll to bottom
+                content.scrollTop = content.scrollHeight;
+                
+                // Simulate reply after a delay
+                setTimeout(() => {
+                    const replies = [
+                        "Okay!",
+                        "Interesting...",
+                        "I see what you mean",
+                        "Let me think about that",
+                        "Thanks for sharing!"
+                    ];
+                    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                    const replyElement = createMessageElement(randomReply, "received");
+                    content.appendChild(replyElement);
+                    content.scrollTop = content.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        function sendVoiceMessage(chatWindow) {
+            if (!chatWindow) return;
+            
+            const duration = Math.floor(Math.random() * 10) + 1; // Random duration 1-10 seconds
+            const messageElement = createMessageElement(`Voice message: ${duration}s`, "sent", true);
+            const content = chatWindow.querySelector(".msg-content");
+            content.appendChild(messageElement);
+            
+            // Scroll to bottom
+            content.scrollTop = content.scrollHeight;
+            
+            // Simulate reply after a delay
+            setTimeout(() => {
+                const replyElement = createMessageElement("Nice voice message!", "received");
+                content.appendChild(replyElement);
+                content.scrollTop = content.scrollHeight;
+            }, 1500);
+        }
+
+        function createMessageElement(text, type, isVoice = false) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `msg ${type}`;
+            
+            const messageP = document.createElement("p");
+            messageP.textContent = text;
+            messageDiv.appendChild(messageP);
+            
+            const timeSpan = document.createElement("span");
+            timeSpan.className = "msg-time";
+            
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                              now.getMinutes().toString().padStart(2, '0');
+            timeSpan.textContent = timeString;
+            
+            if (type === "sent") {
+                const tickSpan = document.createElement("span");
+                tickSpan.className = "msg-tick";
+                tickSpan.textContent = "✓✓";
+                timeSpan.appendChild(tickSpan);
+            }
+            
+            messageDiv.appendChild(timeSpan);
+            
+            return messageDiv;
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("active");
+        }
+
+        function showSection(sectionName) {
+            // Hide all chat windows and sections
+            document.querySelectorAll(".jibapp-message").forEach(win => {
+                win.classList.remove("active");
+            });
+            
+            document.querySelectorAll(".section").forEach(section => {
+                section.classList.remove("active");
+            });
+            
+            // Show the selected section
+            const section = document.getElementById(`${sectionName}-section`);
+            if (section) {
+                section.classList.add("active");
+                
+                // Hide sidebar on mobile when opening a section
+                if (window.innerWidth <= 768) {
+                    document.querySelector(".sidebar").style.display = "none";
+                }
+            }
+        }
+
+        function openCamera() {
+            alert("Camera feature would open here!");
+            // In a real implementation, this would access the device camera
+        }
+
+        function promptSearchInside(chatId) {
+            const searchTerm = prompt("Search in chat:");
+            if (searchTerm) {
+                alert(`Searching for "${searchTerm}" in chat ${chatId}`);
+                // In a real implementation, this would highlight matching messages
+            }
+        }
+
+        function initializeFavoriteButtons() {
+            // This would initialize the favorite functionality
+            // For now, we'll just add a click handler to show it works
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    alert(this.classList.contains('active') ? 
+                          'Added to favorites!' : 'Removed from favorites!');
+                });
+            });
+        }
+
+        // Make functions globally available for onclick handlers
+        window.toggleMobileMenu = toggleMobileMenu;
+        window.showSection = showSection;
+        window.openCamera = openCamera;
+        window.promptSearchInside = promptSearchInside;
+    </script>
+</body>
+</html>
+
+
