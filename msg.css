@@ -1121,7 +1121,7 @@ body.light-mode .msg-input {
 }
 
 body.light-mode #desktop-sidebar {
-    background: var(--wa-bg-secondary);
+    background: var(--wa-bg-secondary-dark);
 }
 
 body.light-mode .sidebar-menu li,
