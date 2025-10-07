@@ -670,7 +670,7 @@ body.light-mode #dark-mode {
     align-items: center;
 }
 
-#sidebar-toggle,.sidebar-header h1 img {
+#sidebar-toggle,.sidebar-header h1 img,#sidebar-toggle-pc {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -977,7 +977,6 @@ body.light-mode #dark-mode {
     max-width: 200px;
     height: 40px;
 }
-
 /* Light mode adjustments */
 body.light-mode .typing-indicator {
     background: var(--wa-bubble-incoming);
@@ -1049,17 +1048,79 @@ body.light-mode .typing-dots span {
 .msg-delivered {
     color: var(--wa-text-secondary);
 }
+#lightcam,
+#lightmenu,
+#lightfilter,
+#lightlogopc,
+#sidebar-toggle-pc,
+#lightchatpc,
+#lightstatuspc,
+#lightcallpc,
+#lightcampc,
+#lightcompc,
+#lightsetpc,
+#lightchat,
+#lightcom,
+#lightcall,
+#lightset,
+#lightstatus,
+#lightlogo2pc{
+    display: none;
+}
 /* Light mode styles */
 body.light-mode {
     background-color: var(--wa-bg-main);
     color: var(--wa-text-primary);
 }
-/*
+
 body.light-mode #hup,
 body.light-mode #nav-bottom,
 body.light-mode .msg-header {
-    background: var(--wa-bg-secondary);
-}*/
+    background: var(--wa-bg-main);
+    color: var(--blac);
+    border-bottom: 1px solid var(--blac);
+    border-top: 1px solid var(--blac);
+}
+body.light-mode #hup #lightcam,
+body.light-mode #lightcam,
+body.light-mode #lightmenu,
+body.light-mode #lightfilter,
+body.light-mode #lightlogopc,
+body.light-mode #sidebar-toggle-pc,
+body.light-mode #lightchatpc,
+body.light-mode #lightstatuspc,
+body.light-mode #lightcallpc,
+body.light-mode #lightcampc,
+body.light-mode #lightcompc,
+body.light-mode #lightsetpc,
+body.light-mode #lightchat,
+body.light-mode #lightcom,
+body.light-mode #lightcall,
+body.light-mode #lightset,
+body.light-mode #lightstatus,
+body.light-mode #lightlogo2pc{
+    display: block;
+}
+body.light-mode #hup #darkcam,
+body.light-mode #darkcam,
+body.light-mode #darkmenu,
+body.light-mode #darkfilter,
+body.light-mode #darklogopc,
+body.light-mode #sidebar-toggle,
+body.light-mode #darkchatpc,
+body.light-mode #darkstatuspc,
+body.light-mode #darkcallpc,
+body.light-mode #darkcampc,
+body.light-mode #darkcompc,
+body.light-mode #darksetpc,
+body.light-mode #darkchat,
+body.light-mode #darkcom,
+body.light-mode #darkcall,
+body.light-mode #darkset,
+body.light-mode #darkstatus,
+body.light-mode #darklogo2pc{
+    display: none;
+}
 
 body.light-mode #main {
     background: var(--wa-bg-main);
@@ -1067,7 +1128,7 @@ body.light-mode #main {
 
 body.light-mode #search {
     background: var(--wa-bg-input);
-    border: 1px solid var(--wa-green);
+    border: 1px solid var(--blac);
 }
 
 body.light-mode #search input {
@@ -1080,7 +1141,7 @@ body.light-mode #search input::placeholder {
     color: var(--wa-text-placeholder);
 }
 body.light-mode .chat {
-    border: 1px solid var(--wa-green);
+    border: 1px solid var(--blac); 
 }
 body.light-mode .chat-info h4 {
     color: var(--wa-text-primary);
@@ -1091,7 +1152,7 @@ body.light-mode .chat-info p {
 }
 
 body.light-mode .chat-time {
-    color: var(--wa-text-secondary);
+    color: var(--blac);
 }
 
 body.light-mode .msg-name span {
@@ -1121,14 +1182,16 @@ body.light-mode .msg-input {
 }
 
 body.light-mode #desktop-sidebar {
-    background: var(--wa-bg-secondary-dark);
+    background: var(--wa-bg-main);
 }
 
 body.light-mode .sidebar-menu li,
 body.light-mode .sidebar-nav-bottom li {
     color: var(--wa-text-primary);
 }
-
+body.light-mode .sidebar-menu li button span{
+    color: var(--blac);
+}
 body.light-mode .sidebar-header h1 {
     color: var(--wa-text-primary);
 }
@@ -1168,8 +1231,27 @@ body.light-mode .encryption-message {
     background: var(--blac);
     color: var(--white);
 }
-
-
+body.light-mode #msgpc { 
+    color: var(--blac);
+}
+body.light-mode #nav-bottom .nav-btn{
+    color: var(--wa-bg-main-dark);
+}
+body.light-mode .sidebar-menu .active,
+body.light-mode .nav-btn.active,
+body.light-mode .sidebar-menu li:hover,
+body.light-mode .nav-btn:hover{
+    background: var(--podium-cds-color-grey-300);
+}
+body.light-mode #nav button{
+    color: var(--blac);
+}
+body.light-mode #nav button.active{
+    color: var(--white);
+}
+body.light-mode .sidebar-menu .active{
+    
+}
 
 
 
@@ -1184,14 +1266,14 @@ body.light-mode .encryption-message {
     #hup,#nav-bottom{
         width: 30%;
         z-index: 889;
-        left: 4%;
+        left: 3.5%;
         position: fixed;
     }
     #main{
         width: 30%;
         padding-top: 80px;
         z-index: 888;
-        left: 4%;
+        left: 3.5%;
         position: fixed;
     }
     #camera,#menu{
@@ -1261,7 +1343,7 @@ body.light-mode .encryption-message {
     
     .jibapp-message{
         right: 0;
-        left: 34%;
+        left: 33.5%;
         max-width: 66%;
         display: none;
         position: fixed;

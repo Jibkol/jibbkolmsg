@@ -1683,3 +1683,12 @@ document.querySelectorAll('#nav button').forEach(btn => {
         if (nav) nav.classList.remove('show');
     });
 });
+
+const pcmenubtn = document.getElementById("sidebar-toggle-pc")
+const pcmenu = document.getElementById("desktop-sidebar")
+const overlay =document.getElementById("overlay")
+
+pcmenubtn.addEventListener("click" , () =>{
+    pcmenu.classList.toggle("expanded");
+    overlay.classListadd("show")
+});

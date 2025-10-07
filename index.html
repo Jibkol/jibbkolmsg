@@ -10,12 +10,17 @@
     <header id="hup">
         <h2>JibbApp</h2>
         <div id="btns">
-            <button id="camera" class="btn"><img src="./assets/unsplash_32px.svg" alt=""></button>
+            <button id="camera" class="btn">
+            <img src="./assets/unsplash_32px.svg" alt="camera" id="darkcam">
+            <img src="./dark-icon/unsplash_32px.svg" alt="camera" id="lightcam">
+          </button>
             <button id="menu" class="btn">
-                <img src="./assets/menu_vertical_24px.svg" alt="menu">
+                <img src="./assets/menu_vertical_24px.svg" alt="menu" id="darkmenu">
+                <img src="./dark-icon/menu_vertical_24px.svg" alt="" id="lightmenu">
             </button>
             <button id="menu2" class="btn">
-              <img src="./assets/filter_24px.svg" alt="">
+              <img src="./assets/filter_24px.svg" alt="" id="darkfilter">
+              <img src="./dark-icon/filter_24px.svg" alt="" id="lightfilter">
             </button>
         </div>
     </header>
@@ -29,7 +34,7 @@
             <li>Settings</li>
             <li>Switch accounts</li>
             <button id="dark-mode">
-                <img src="./assets/toggle_off_24px.svg" alt="dark mode" id="light-icon">
+                <img src="./dark-icon/toggle_off_24px.svg" alt="dark mode" id="light-icon">
                 <img src="./assets/toggle_on_24px.svg" alt="light mode" id="dark-icon">
                 Dark Mode
             </button>
@@ -47,34 +52,60 @@
 <section id="desk">
     <div id="desktop-sidebar">
        <div class="sidebar-header">
-        <img src="./assets/menu_50px.svg" alt="Menu" id="sidebar-toggle" />
+        <img src="./assets/menu_50px.svg" alt="Menu" id="sidebar-toggle"/>
+        <img src="./dark-icon/menu_50px.svg" alt="" id="sidebar-toggle-pc">
         <h1>
-          <img src="./assets/new_message_32px.svg" alt="">JibApp</h1>
+          <img src="./assets/new_message_32px.svg" alt="" id="darklogopc">
+          <img src="./dark-icon/new_message_32px.svg" alt="" id="lightlogopc">
+          JibApp
+        </h1>
         </div>
         <ul class="sidebar-menu">
-        <li class="active"><img src="./assets/chat_room_24px.svg" alt="Chats" /> <span>Chats</span></li>
-        <li><img src="./assets/update_24px.svg" alt="Status" /> <span>Status</span></li>
-        <li><img src="./assets/user_groups_80px.svg" alt="Community" /> <span>Community</span></li>
-        <li><img src="./assets/phone_50px.svg" alt="Calls" /> <span>Calls</span></li>
+        <li class="active">
+          <img src="./assets/chat_room_24px.svg" alt="Chats" id="darkchatpc"> 
+          <img src="./dark-icon/chat_room_24px.svg" alt="Chats" id="lightchatpc">
+          <span>Chats</span>
+        </li>
+        <li>
+          <img src="./assets/update_24px.svg" alt="Status" id="darkstatuspc">
+          <img src="./dark-icon/update_24px.svg" alt="" id="lightstatuspc"> 
+          <span>Status</span>
+        </li>
+        <li>
+          <img src="./assets/user_groups_80px.svg" alt="Community" id="darkcompc"> 
+          <img src="./dark-icon/user_groups_80px.svg" alt="" id="lightcompc">
+          <span>Community</span>
+        </li>
+        <li>
+          <img src="./assets/phone_50px.svg" alt="Calls" id="darkcallpc">
+          <img src="./dark-icon/phone_50px.svg" alt="" id="lightcallpc"> 
+          <span>Calls</span>
+        </li>
         <li>
           <button id="camera2" class="btn">
-            <img src="./assets/unsplash_32px.svg" alt="camera">
+            <img src="./assets/unsplash_32px.svg" alt="camera" id="darkcampc">
+            <img src="./dark-icon/unsplash_32px.svg" alt="" id="lightcampc">
             <span>Camera</span>
           </button>
         </li>
         <li>
         <button id="dark-modepc">
-                <img src="./assets/toggle_off_24px.svg" alt="dark mode" id="light-iconpc">
+                <img src="./dark-icon/toggle_off_24px.svg" alt="dark mode" id="light-iconpc">
                 <img src="./assets/toggle_on_24px.svg" alt="light mode" id="dark-iconpc">
                 <span>Dark Mode</span> 
             </button>
         </li>
     </ul>
     <ul class="sidebar-nav-bottom">
-        <li><img src="./assets/settings_50px.svg"><span>New contacts</span>
+        <li>
+          <img src="./assets/settings_50px.svg"><span>New contacts</span>
         </li>
-        <li><img src="./assets/settings_50px.svg"><span>Jibkkol AI</span></li>
-      <li><img src="./assets/settings_50px.svg" alt="settings"/><span>Settings</span></li>
+        <li>
+          <img src="./assets/settings_50px.svg"><span>Jibkkol AI</span></li>
+      <li>
+        <img src="./assets/settings_50px.svg" alt="settings" id="darksetpc">
+        <img src="./dark-icon/settings_50px.svg" alt="" id="lightsetpc">
+        <span>Settings</span></li>
     </ul>
     </div>
     <section id="main">
@@ -259,7 +290,7 @@
                   <span class="msg-time">2:33 PM <img src="./assets/double_tick_32px.svg" alt=""></span>
                 </div>
                 <div class="msg received">
-                  <p>Will do, thanks!</p>
+                  <p>Will d o, thanks!</p>
                   <span class="msg-time">2:34 PM</span>
                 </div>
               </div>
@@ -282,26 +313,31 @@
       </div>
     </section>
     <section id="msgpc">
-      <img src="./assets/new_message_32px.svg" alt="">
+      <img src="./assets/new_message_32px.svg" alt="" id="darklogo2pc">
+      <img src="./dark-icon/new_message_32px.svg" alt="" id="lightlogo2pc">
       JibApp
       <h3>Start chatting Now</h3>
     </section>
 </section>
 <header id="nav-bottom">
         <button class="nav-btn active">
-            <img src="./assets/chat_room_24px.svg" alt="chats">
+            <img src="./assets/chat_room_24px.svg" alt="chats" id="darkchat">
+            <img src="./dark-icon/chat_room_24px.svg" alt="" id="lightchat">
             <span>Chat</span>
         </button>
         <button class="nav-btn">
-            <img src="./assets/update_24px.svg" alt="contacts">
+            <img src="./assets/update_24px.svg" alt="contacts" id="darkstatus">
+            <img src="./dark-icon/update_24px.svg" alt="" id="lightstatus">
             <span>Status</span>
         </button>
         <button class="nav-btn">
-            <img src="./assets/user_groups_80px.svg" alt="calls">
+            <img src="./assets/user_groups_80px.svg" alt="Community" id="darkcom">
+            <img src="./dark-icon/user_groups_80px.svg" alt="" id="lightcom">
             <span>Community</span>
         </button>
         <button class="nav-btn">
-            <img src="./assets/phone_50px.svg" alt="settings">
+            <img src="./assets/phone_50px.svg" alt="calls" id="darkcall">
+            <img src="./dark-icon/phone_50px.svg" alt="" id="lightcall">
             <span>Calls</span>
         </button>
 </header>
@@ -311,4 +347,4 @@
 </div>
 <script src="msg2.js"></script>
 </body>
-</html>
+</html>  
